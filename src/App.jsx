@@ -1,24 +1,22 @@
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
+import { Routes, Route } from "react-router";
+import { Dashboard } from "./components/Dashboard";
+import React, { useState, useEffect } from "react";
+import { Navbar } from "./components/Navbar";
+import { DetailCharacter } from "./components/DetailCharacter";
+import { DetailPlanet } from "./components/DetailPlanet";
 
-import { ImageLink } from "./components/ImageLink";
+
 
 export const App = () => {
+
   return (
     <>
-      <div>
-        <ImageLink src={viteLogo} alt={"Vite logo"} href={"https://vite.dev"} />
-        <ImageLink
-          src={reactLogo}
-          alt={"React logo"}
-          href={"https://react.dev"}
-        />
-      </div>
-      <h1>Vite + React</h1>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/people/:id" element={<DetailCharacter />} />
+        <Route path="/planets/:id" element={<DetailPlanet />} />
+      </Routes>
     </>
   );
 };
