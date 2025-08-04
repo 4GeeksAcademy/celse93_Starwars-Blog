@@ -3,17 +3,16 @@ import {
   Avatar,
   Box,
   Button,
-  FormControl,
   IconButton,
-  InputLabel,
   Menu,
   MenuItem,
-  Select,
   Toolbar,
+  Typography,
 } from "@mui/material";
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { FavoritesContext } from "../FavoritesContext";
 import DeleteIcon from "@mui/icons-material/Delete";
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 export const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -28,18 +27,35 @@ export const Navbar = () => {
     setAnchorEl(null);
   };
 
-  console.log(favorites);
-
   return (
     <>
-      <AppBar position="static">
+      <AppBar sx={{ color: "yellow", bgcolor: "black" }} position="static">
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           <IconButton size="large" edge="start" color="inherit" component="div">
-            <Avatar src="src/assets/react.svg" />
+            <Avatar
+              src="src/assets/starwarslogo.png"
+              sx={{ width: 130, height: 80 }}
+            />
           </IconButton>
           <Box sx={{ minWidth: 120 }}>
-            <Button variant="contained" color="info" onClick={handleClick}>
-              Favorites
+            <Button
+              variant="contained"
+              sx={{ color: "black", bgcolor: "yellow" }}
+              onClick={handleClick}
+            >
+              <Typography>Favorites</Typography>
+              <Typography
+                sx={{
+                  bgcolor: "black",
+                  color: "yellow",
+                  borderRadius: "50%",
+                  ml: 1,
+                  width: 25,
+                }}
+              >
+                {favorites.length}
+              </Typography>
+              <ArrowDropDownIcon />
             </Button>
             <Menu anchorEl={anchorEl} open={isOpen} onClose={handleClose}>
               {favorites.map((favorite) => (
@@ -59,6 +75,7 @@ export const Navbar = () => {
           </Box>
         </Toolbar>
       </AppBar>
+      <hr></hr>
     </>
   );
 };

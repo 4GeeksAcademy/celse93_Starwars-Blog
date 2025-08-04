@@ -1,21 +1,19 @@
 import { Routes, Route } from "react-router";
-import { Dashboard } from "./components/Dashboard";
-import React, { useState, useEffect } from "react";
 import { Navbar } from "./components/Navbar";
-import { DetailCharacter } from "./components/DetailCharacter";
-import { DetailPlanet } from "./components/DetailPlanet";
-
-
+import { pages } from "./utilities/pages";
 
 export const App = () => {
-
   return (
     <>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/people/:id" element={<DetailCharacter />} />
-        <Route path="/planets/:id" element={<DetailPlanet />} />
+        {pages.map((page) => {
+          return <Route path={page.route} element={page.component} />;
+        })}
+        <Route
+          path="*"
+          element={<h1 style={{ color: "white" }}>Not found!</h1>}
+        />
       </Routes>
     </>
   );

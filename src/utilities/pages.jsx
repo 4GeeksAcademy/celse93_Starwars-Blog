@@ -1,20 +1,15 @@
-
+import { Dashboard } from "../components/Dashboard";
+import { DetailSpecie } from "../components/DetailSpecie";
 
 export const pages = [
-    {
-        name: "Dashboard",
-        route: "/",
-        Component: <Dashboard />
-    },
-    {
-        name: "Dashboard",
-        route: "/people/:id",
-        Component: <Detail/>
-    },
-    {
-        name: "Dashboard",
-        route: "/planet/:id",
-        Component: <Detail/>
-    },
-
-]
+  {
+    name: "Dashboard",
+    route: "/",
+    component: <Dashboard />,
+  },
+  {
+    name: "Detail",
+    route: "/:species/:id",
+    component: <DetailSpecie />,
+  },
+];

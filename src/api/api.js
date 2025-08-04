@@ -1,14 +1,14 @@
 export const getAllCharactersReq = async () => {
   try {
     const response = await fetch(
-      `https://www.swapi.tech/api/people/`,
+      `https://starwars-databank-server.vercel.app/api/v1/characters`,
       {
         method: "GET",
       }
     );
     if (response.ok) {
       const responseJson = await response.json();
-      return responseJson.results;
+      return responseJson.data;
     } else {
       return {
         error: { status: response.status, statusText: response.statusText },
@@ -19,18 +19,17 @@ export const getAllCharactersReq = async () => {
   }
 };
 
-
-export const getCharacterReq = async (id) => {
+export const getSpecieReq = async (specie, id) => {
   try {
     const response = await fetch(
-      `https://www.swapi.tech/api/people/${id}`,
+      `https://starwars-databank-server.vercel.app/api/v1/${specie}/${id}`,
       {
         method: "GET",
       }
     );
     if (response.ok) {
       const responseJson = await response.json();
-      return responseJson.result.properties;
+      return responseJson;
     } else {
       return {
         error: { status: response.status, statusText: response.statusText },
@@ -41,18 +40,17 @@ export const getCharacterReq = async (id) => {
   }
 };
 
-
-export const getAllPlanetsReq = async () => {
+export const getAllCreaturesReq = async () => {
   try {
     const response = await fetch(
-      `https://www.swapi.tech/api/planets/`,
+      `https://starwars-databank-server.vercel.app/api/v1/creatures`,
       {
         method: "GET",
       }
     );
     if (response.ok) {
       const responseJson = await response.json();
-      return responseJson.results;
+      return responseJson.data;
     } else {
       return {
         error: { status: response.status, statusText: response.statusText },
@@ -63,18 +61,17 @@ export const getAllPlanetsReq = async () => {
   }
 };
 
-
-export const getPlanetReq = async (id) => {
+export const getAllDroidssReq = async () => {
   try {
     const response = await fetch(
-      `https://www.swapi.tech/api/planets/${id}`,
+      `https://starwars-databank-server.vercel.app/api/v1/droids`,
       {
         method: "GET",
       }
     );
     if (response.ok) {
       const responseJson = await response.json();
-      return responseJson.result.properties;
+      return responseJson.data;
     } else {
       return {
         error: { status: response.status, statusText: response.statusText },

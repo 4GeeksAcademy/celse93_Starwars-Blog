@@ -1,4 +1,4 @@
-import { getAllCharactersReq } from "../api/api";
+import { getAllCreaturesReq } from "../api/api";
 import React, { useState, useEffect, useContext } from "react";
 import {
   Box,
@@ -7,22 +7,22 @@ import {
   CardActions,
   CardContent,
   CardMedia,
-  IconButton,
   Typography,
+  IconButton,
 } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useNavigate } from "react-router";
 import { FavoritesContext } from "../FavoritesContext";
 
-export const Characters = () => {
-  const [characters, setCharacters] = useState([]);
-  const { favorites, addFavorites, deleteFavorites, isFavorite } =
+export const Creatures = () => {
+  const [creatures, setCreatures] = useState([]);
+  const { addFavorites, deleteFavorites, isFavorite } =
     useContext(FavoritesContext);
   let navigate = useNavigate();
 
   const refreshData = () => {
-    getAllCharactersReq().then((data) => {
-      setCharacters(data);
+    getAllCreaturesReq().then((data) => {
+      setCreatures(data);
     });
   };
 
@@ -31,20 +31,20 @@ export const Characters = () => {
   return (
     <>
       <Box sx={{ display: "flex", flexDirection: "row", overflow: "auto" }}>
-        {characters.map((character) => (
-          <Card key={character._id} sx={{ minWidth: 300, mr: 2 }}>
+        {creatures.map((creature) => (
+          <Card key={creature._id} sx={{ minWidth: 300, mr: 2 }}>
             <CardMedia
               sx={{ height: 140 }}
-              image={character.image}
-              title="character"
+              image={creature.image}
+              title="creature"
             ></CardMedia>
             <CardContent>
-              <Typography>{character.name}</Typography>
+              <Typography>{creature.name}</Typography>
             </CardContent>
             <CardActions>
               <Button
                 onClick={() => {
-                  navigate(`/characters/${character._id}`);
+                  navigate(`/creatures/${creature._id}`);
                 }}
                 size="small"
                 variant="contained"
@@ -55,16 +55,20 @@ export const Characters = () => {
               <IconButton>
                 <FavoriteIcon
                   sx={{
-                    color: isFavorite(character._id, character.name)
+                    color: isFavorite(creature._id, creature.name)
                       ? "yellow"
                       : "black",
                   }}
-                  onClick={
-                    isFavorite(character._id, character.name)
-                      ? () => deleteFavorites(character.name)
-                      : () => addFavorites(character._id, character.name)
-                  }
                   fontSize="medium"
+                  onClick={
+                    isFavorite(creature._id, creature.name)
+                      ? () => {
+                          deleteFavorites(creature.name);
+                        }
+                      : () => {
+                          addFavorites(creature._id, creature.name);
+                        }
+                  }
                 />
               </IconButton>
             </CardActions>

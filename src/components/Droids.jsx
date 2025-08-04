@@ -1,4 +1,4 @@
-import { getAllPlanetsReq } from "../api/api";
+import { getAllDroidssReq } from "../api/api";
 import React, { useState, useEffect, useContext } from "react";
 import {
   Box,
@@ -14,15 +14,15 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useNavigate } from "react-router";
 import { FavoritesContext } from "../FavoritesContext";
 
-export const Planets = () => {
-  const [planets, setPlanets] = useState([]);
-  const { favorites, addFavorites, deleteFavorites, isFavorite } =
+export const Droids = () => {
+  const [droids, setDroids] = useState([]);
+  const { addFavorites, deleteFavorites, isFavorite } =
     useContext(FavoritesContext);
   let navigate = useNavigate();
 
   const refreshData = () => {
-    getAllPlanetsReq().then((data) => {
-      setPlanets(data);
+    getAllDroidssReq().then((data) => {
+      setDroids(data);
     });
   };
 
@@ -31,41 +31,42 @@ export const Planets = () => {
   return (
     <>
       <Box sx={{ display: "flex", flexDirection: "row", overflow: "auto" }}>
-        {planets.map((planet) => (
-          <Card key={planet.uid} sx={{ minWidth: 300, mr: 2 }}>
+        {droids.map((droid) => (
+          <Card key={droid._id} sx={{ minWidth: 300, mr: 2 }}>
             <CardMedia
               sx={{ height: 140 }}
-              image="https://placehold.co/600x400"
-              title="planet"
+              image={droid.image}
+              title="droid"
             ></CardMedia>
             <CardContent>
-              <Typography>{planet.name}</Typography>
+              <Typography>{droid.name}</Typography>
             </CardContent>
             <CardActions>
               <Button
                 onClick={() => {
-                  navigate(`/planets/${planet.uid}`);
+                  navigate(`/droids/${droid._id}`);
                 }}
                 size="small"
-                variant="outlined"
+                variant="contained"
+                sx={{ color: "black", bgcolor: "yellow" }}
               >
                 Learn more!
               </Button>
               <IconButton>
                 <FavoriteIcon
                   sx={{
-                    color: isFavorite(planet.uid, planet.name)
-                      ? "red"
+                    color: isFavorite(droid._id, droid.name)
+                      ? "yellow"
                       : "black",
                   }}
                   fontSize="medium"
                   onClick={
-                    isFavorite(planet.uid, planet.name)
+                    isFavorite(droid._id, droid.name)
                       ? () => {
-                          deleteFavorites(planet.name);
+                          deleteFavorites(droid.name);
                         }
                       : () => {
-                          addFavorites(planet.uid, planet.name);
+                          addFavorites(droid._id, droid.name);
                         }
                   }
                 />

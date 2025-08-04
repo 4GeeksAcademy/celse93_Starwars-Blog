@@ -10,21 +10,21 @@ export const FavoritesContext = createContext({
 export const FavoritesProvider = ({ children }) => {
   const [favorites, setFavorites] = useState([]);
 
-  const addFavorites = (uid, name) => {
-    setFavorites([...favorites, { uid: uid, name: name }]);
+  const addFavorites = (id, name) => {
+    setFavorites([...favorites, { id: id, name: name }]);
   };
 
   const deleteFavorites = (name) => {
     setFavorites(
       favorites.filter((elem) => {
-        return (elem.name != name);
+        return elem.name != name;
       })
     );
   };
 
-  const isFavorite = (uid, name) => {
+  const isFavorite = (id, name) => {
     return favorites.some((elem) => {
-      return (elem.uid == uid && elem.name == name);
+      return elem.id == id && elem.name == name;
     });
   };
 
